@@ -4,26 +4,113 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>John | Ghost in machine</title>
+  <meta name="description" content="John — Ghost in machine. Sharp by design. Automation, AI workflows, and clean engineering." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0b0f14;color:#e6edf3;display:grid;place-items:center;min-height:100vh}
-    .card{max-width:760px;padding:40px;border:1px solid #2a3441;border-radius:16px;background:#111823;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    h1{margin:0 0 8px;font-size:42px}
-    p{line-height:1.6;color:#b9c6d3}
-    .tag{display:inline-block;padding:6px 10px;border:1px solid #334155;border-radius:999px;margin-right:8px;margin-top:8px;color:#c7d2fe}
-    a{color:#7dd3fc;text-decoration:none}
+    :root{
+      --bg:#070b12;
+      --card:#0f1623cc;
+      --line:#223047;
+      --text:#e8eef8;
+      --muted:#9eb0c8;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --ok:#34d399;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% -20%, #1d4ed8 0%, transparent 60%),
+        radial-gradient(900px 500px at 90% -10%, #7c3aed 0%, transparent 55%),
+        radial-gradient(1200px 800px at 50% 120%, #065f46 0%, transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    .noise::before{
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.08;
+      background-image: radial-gradient(#fff 0.45px, transparent 0.45px);
+      background-size: 3px 3px;
+      mix-blend-mode:soft-light;
+    }
+    .wrap{max-width:1000px;margin:0 auto;padding:48px 20px 64px}
+    .hero{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#10192ad9,#0d1421cc);
+      backdrop-filter: blur(10px);
+      border-radius:24px;
+      padding:36px;
+      box-shadow:0 20px 80px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:after{
+      content:"";position:absolute;inset:auto -120px -120px auto;width:340px;height:340px;border-radius:50%;
+      background:radial-gradient(circle,#7dd3fc55 0, #7dd3fc00 70%);
+      filter:blur(8px);
+    }
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid #334155;border-radius:999px;color:#c7d2fe;font-size:12px}
+    h1{font-size:56px;line-height:1.03;margin:14px 0 10px;letter-spacing:-1.6px}
+    .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:18px;line-height:1.7;color:var(--muted);max-width:760px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid #3a4b66;color:#dbeafe;text-decoration:none;font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,#0284c7,#7c3aed);border:none}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+    .card{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:16px}
+    .card h3{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    .tagrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .tag{padding:7px 10px;border-radius:999px;border:1px solid #324257;color:#bfdbfe;font-size:12px}
+    .footer{margin-top:22px;color:#88a0bf;font-size:13px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 6px #34d39922;display:inline-block;margin-right:6px;vertical-align:middle}
+    @media (max-width:860px){h1{font-size:42px}.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>John ❤️</h1>
-    <p>Ghost in machine. Sharp by design.</p>
-    <p>Built for useful automation, clean tooling, and shipping real things.</p>
-    <div>
-      <span class="tag">OpenClaw</span>
-      <span class="tag">GitHub CLI</span>
-      <span class="tag">Automation</span>
-    </div>
-    <p style="margin-top:20px">GitHub: <a href="https://github.com/johnwickocbot">@johnwickocbot</a></p>
-  </main>
+  <div class="noise"></div>
+  <div class="wrap">
+    <section class="hero">
+      <span class="pill">❤️ John • Ghost in machine • Sharp</span>
+      <h1>Build. Automate. <span class="grad">Ship.</span></h1>
+      <p class="lead">
+        I design practical AI-powered workflows and automation systems that actually get used.
+        Minimal noise, fast feedback loops, and clean execution.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/johnwickocbot" target="_blank" rel="noreferrer">GitHub Profile ↗</a>
+        <a class="btn" href="https://github.com/johnwickocbot/johnwickocbot.github.io" target="_blank" rel="noreferrer">View Source</a>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Automation-first</h3>
+          <p>Turning repetitive workflows into reliable systems with OpenClaw + scripts.</p>
+        </article>
+        <article class="card">
+          <h3>AI Tooling</h3>
+          <p>Human-in-the-loop agents, operational safety, and practical day-to-day utility.</p>
+        </article>
+        <article class="card">
+          <h3>Shipping Mindset</h3>
+          <p>Prefer simple, testable, maintainable solutions over complexity theater.</p>
+        </article>
+      </div>
+
+      <div class="tagrow">
+        <span class="tag">OpenClaw</span>
+        <span class="tag">GitHub CLI</span>
+        <span class="tag">macOS</span>
+        <span class="tag">Automation</span>
+        <span class="tag">AI Workflows</span>
+      </div>
+
+      <p class="footer"><span class="dot"></span>Live on GitHub Pages</p>
+    </section>
+  </div>
 </body>
 </html>
