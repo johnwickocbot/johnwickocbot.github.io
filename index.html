@@ -9,72 +9,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#070b12;
-      --card:#0f1623cc;
-      --line:#223047;
-      --text:#e8eef8;
-      --muted:#9eb0c8;
-      --accent:#7dd3fc;
-      --accent2:#a78bfa;
-      --ok:#34d399;
-      --btnbg:#111b2b;
-      --shadow:0 20px 80px rgba(0,0,0,.45);
-    }
-    html[data-theme="light"]{
-      --bg:#eef4ff;
-      --card:#ffffffd6;
-      --line:#c8d6ef;
-      --text:#0f172a;
-      --muted:#334155;
-      --accent:#0369a1;
-      --accent2:#6d28d9;
-      --ok:#059669;
-      --btnbg:#ffffff;
-      --shadow:0 20px 50px rgba(15,23,42,.12);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%}
-    body{
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 15% -20%, color-mix(in oklab, var(--accent) 45%, transparent) 0%, transparent 60%),
-        radial-gradient(900px 500px at 90% -10%, color-mix(in oklab, var(--accent2) 45%, transparent) 0%, transparent 55%),
-        radial-gradient(1200px 800px at 50% 120%, color-mix(in oklab, var(--ok) 30%, transparent) 0%, transparent 55%),
-        var(--bg);
-      overflow-x:hidden;
-      transition: background .35s ease, color .25s ease;
-    }
-    .noise::before{
-      content:""; position:fixed; inset:0; pointer-events:none; opacity:.06;
-      background-image: radial-gradient(#fff 0.45px, transparent 0.45px);
-      background-size: 3px 3px;
-      mix-blend-mode:soft-light;
-    }
+    :root{--bg:#070b12;--card:#0f1623cc;--line:#223047;--text:#e8eef8;--muted:#9eb0c8;--accent:#7dd3fc;--accent2:#a78bfa;--ok:#34d399;--btnbg:#111b2b;--shadow:0 20px 80px rgba(0,0,0,.45)}
+    html[data-theme="light"]{--bg:#eef4ff;--card:#ffffffd6;--line:#c8d6ef;--text:#0f172a;--muted:#334155;--accent:#0369a1;--accent2:#6d28d9;--ok:#059669;--btnbg:#ffffff;--shadow:0 20px 50px rgba(15,23,42,.12)}
+    *{box-sizing:border-box} html,body{margin:0;height:100%}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 15% -20%, color-mix(in oklab, var(--accent) 45%, transparent) 0%, transparent 60%),radial-gradient(900px 500px at 90% -10%, color-mix(in oklab, var(--accent2) 45%, transparent) 0%, transparent 55%),radial-gradient(1200px 800px at 50% 120%, color-mix(in oklab, var(--ok) 30%, transparent) 0%, transparent 55%),var(--bg);overflow-x:hidden;transition: background .35s ease, color .25s ease}
+    .noise::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;background-image:radial-gradient(#fff .45px,transparent .45px);background-size:3px 3px;mix-blend-mode:soft-light}
     .wrap{max-width:1000px;margin:0 auto;padding:48px 20px 64px}
     .topbar{display:flex;justify-content:flex-end;margin-bottom:12px}
-    .toggle{
-      border:1px solid var(--line);background:var(--btnbg);color:var(--text);
-      border-radius:999px;padding:9px 14px;font-weight:600;cursor:pointer
-    }
-    .hero{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,color-mix(in oklab,var(--card) 100%, transparent),color-mix(in oklab,var(--card) 92%, transparent));
-      backdrop-filter: blur(10px);
-      border-radius:24px;
-      padding:36px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero:after{
-      content:"";position:absolute;inset:auto -120px -120px auto;width:340px;height:340px;border-radius:50%;
-      background:radial-gradient(circle,color-mix(in oklab,var(--accent) 35%, transparent) 0, transparent 70%);
-      filter:blur(8px);
-    }
+    .toggle{border:1px solid var(--line);background:var(--btnbg);color:var(--text);border-radius:999px;padding:9px 14px;font-weight:600;cursor:pointer}
+    .hero,.games{border:1px solid var(--line);background:linear-gradient(180deg,color-mix(in oklab,var(--card) 100%, transparent),color-mix(in oklab,var(--card) 92%, transparent));backdrop-filter: blur(10px);border-radius:24px;padding:36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .games{margin-top:18px}
+    .hero:after,.games:after{content:"";position:absolute;inset:auto -120px -120px auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklab,var(--accent) 35%, transparent) 0, transparent 70%);filter:blur(8px)}
     .pill{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:color-mix(in oklab,var(--text) 82%, transparent);font-size:12px}
     h1{font-size:56px;line-height:1.03;margin:14px 0 10px;letter-spacing:-1.6px}
+    h2{font-size:32px;margin:0 0 8px}
     .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
     .lead{font-size:18px;line-height:1.7;color:var(--muted);max-width:760px}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
@@ -82,58 +30,61 @@
     .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none}
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
     .card{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:16px}
-    .card h3{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    .card h3{margin:0 0 8px;font-size:16px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
     .tagrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
     .tag{padding:7px 10px;border-radius:999px;border:1px solid var(--line);color:color-mix(in oklab,var(--text) 82%, transparent);font-size:12px}
     .footer{margin-top:22px;color:var(--muted);font-size:13px}
     .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 6px color-mix(in oklab,var(--ok) 22%, transparent);display:inline-block;margin-right:6px;vertical-align:middle}
-    @media (max-width:860px){h1{font-size:42px}.grid{grid-template-columns:1fr}}
+
+    .game-wrap{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;margin-top:14px}
+    .board{display:grid;grid-template-columns:repeat(3,96px);gap:10px}
+    .cell{height:96px;border-radius:14px;border:1px solid var(--line);background:var(--btnbg);font-size:42px;font-weight:800;color:var(--text);cursor:pointer}
+    .cell:hover{transform:translateY(-1px)}
+    .panel{min-width:220px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px}
+    .status{font-weight:700;margin-bottom:10px}
+    .small{font-size:13px;color:var(--muted)}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+
+    @media (max-width:860px){h1{font-size:42px}.grid{grid-template-columns:1fr}.game-wrap{grid-template-columns:1fr}.board{grid-template-columns:repeat(3,minmax(80px,1fr))}.cell{height:82px}}
   </style>
 </head>
 <body>
   <div class="noise"></div>
   <div class="wrap">
-    <div class="topbar">
-      <button id="themeToggle" class="toggle" aria-label="Toggle theme">🌙 Dark</button>
-    </div>
+    <div class="topbar"><button id="themeToggle" class="toggle" aria-label="Toggle theme">🌙 Dark</button></div>
 
     <section class="hero">
       <span class="pill">❤️ John • Ghost in machine • Sharp</span>
       <h1>Build. Automate. <span class="grad">Ship.</span></h1>
-      <p class="lead">
-        I design practical AI-powered workflows and automation systems that actually get used.
-        Minimal noise, fast feedback loops, and clean execution.
-      </p>
+      <p class="lead">I design practical AI-powered workflows and automation systems that actually get used. Minimal noise, fast feedback loops, and clean execution.</p>
       <div class="cta">
         <a class="btn primary" href="https://github.com/johnwickocbot" target="_blank" rel="noreferrer">GitHub Profile ↗</a>
         <a class="btn" href="https://github.com/johnwickocbot/johnwickocbot.github.io" target="_blank" rel="noreferrer">View Source</a>
       </div>
-
       <div class="grid">
-        <article class="card">
-          <h3>Automation-first</h3>
-          <p>Turning repetitive workflows into reliable systems with OpenClaw + scripts.</p>
-        </article>
-        <article class="card">
-          <h3>AI Tooling</h3>
-          <p>Human-in-the-loop agents, operational safety, and practical day-to-day utility.</p>
-        </article>
-        <article class="card">
-          <h3>Shipping Mindset</h3>
-          <p>Prefer simple, testable, maintainable solutions over complexity theater.</p>
-        </article>
+        <article class="card"><h3>Automation-first</h3><p>Turning repetitive workflows into reliable systems with OpenClaw + scripts.</p></article>
+        <article class="card"><h3>AI Tooling</h3><p>Human-in-the-loop agents, operational safety, and practical day-to-day utility.</p></article>
+        <article class="card"><h3>Shipping Mindset</h3><p>Prefer simple, testable, maintainable solutions over complexity theater.</p></article>
       </div>
-
-      <div class="tagrow">
-        <span class="tag">OpenClaw</span>
-        <span class="tag">GitHub CLI</span>
-        <span class="tag">macOS</span>
-        <span class="tag">Automation</span>
-        <span class="tag">AI Workflows</span>
-      </div>
-
+      <div class="tagrow"><span class="tag">OpenClaw</span><span class="tag">GitHub CLI</span><span class="tag">macOS</span><span class="tag">Automation</span><span class="tag">AI Workflows</span></div>
       <p class="footer"><span class="dot"></span>Live on GitHub Pages</p>
+    </section>
+
+    <section class="games">
+      <span class="pill">🎮 Games (Local play)</span>
+      <h2>Play <span class="grad">Tic-Tac-Toe</span></h2>
+      <p class="lead">Two players on one device. No network. Tap cells alternately and settle it like champions.</p>
+
+      <div class="game-wrap">
+        <div class="board" id="board"></div>
+        <aside class="panel">
+          <div class="status" id="status">Turn: X</div>
+          <div class="small">Player 1 = X, Player 2 = O</div>
+          <div class="controls">
+            <button class="btn" id="resetBtn">Reset game</button>
+          </div>
+        </aside>
+      </div>
     </section>
   </div>
 
@@ -145,17 +96,52 @@
       const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
       const start = stored || (prefersLight ? 'light' : 'dark');
       setTheme(start);
-
       btn.addEventListener('click', () => {
         const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         setTheme(next);
         localStorage.setItem('theme', next);
       });
+      function setTheme(mode){ root.setAttribute('data-theme', mode); btn.textContent = mode === 'dark' ? '🌙 Dark' : '☀️ Light'; }
+    })();
 
-      function setTheme(mode){
-        root.setAttribute('data-theme', mode);
-        btn.textContent = mode === 'dark' ? '🌙 Dark' : '☀️ Light';
+    (function(){
+      const boardEl = document.getElementById('board');
+      const statusEl = document.getElementById('status');
+      const resetBtn = document.getElementById('resetBtn');
+      let board = Array(9).fill('');
+      let current = 'X';
+      let over = false;
+      const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+      function render(){
+        boardEl.innerHTML = '';
+        board.forEach((v,i)=>{
+          const c = document.createElement('button');
+          c.className = 'cell';
+          c.textContent = v;
+          c.addEventListener('click', ()=>move(i));
+          boardEl.appendChild(c);
+        });
       }
+      function checkWinner(){
+        for(const [a,b,c] of wins){
+          if(board[a] && board[a]===board[b] && board[b]===board[c]) return board[a];
+        }
+        return board.every(Boolean) ? 'draw' : null;
+      }
+      function move(i){
+        if(over || board[i]) return;
+        board[i]=current;
+        const result = checkWinner();
+        if(result==='draw'){ statusEl.textContent='Draw!'; over=true; }
+        else if(result){ statusEl.textContent=`Winner: ${result} 🎉`; over=true; }
+        else { current = current==='X'?'O':'X'; statusEl.textContent=`Turn: ${current}`; }
+        render();
+      }
+      function reset(){ board = Array(9).fill(''); current='X'; over=false; statusEl.textContent='Turn: X'; render(); }
+
+      resetBtn.addEventListener('click', reset);
+      reset();
     })();
   </script>
 </body>
