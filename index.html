@@ -14,7 +14,7 @@
     *{box-sizing:border-box} html,body{margin:0;height:100%}
     body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 15% -20%, color-mix(in oklab, var(--accent) 45%, transparent) 0%, transparent 60%),radial-gradient(900px 500px at 90% -10%, color-mix(in oklab, var(--accent2) 45%, transparent) 0%, transparent 55%),radial-gradient(1200px 800px at 50% 120%, color-mix(in oklab, var(--ok) 30%, transparent) 0%, transparent 55%),var(--bg);overflow-x:hidden;transition: background .35s ease, color .25s ease}
     .noise::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;background-image:radial-gradient(#fff .45px,transparent .45px);background-size:3px 3px;mix-blend-mode:soft-light}
-    .wrap{max-width:1000px;margin:0 auto;padding:48px 20px 64px}
+    .wrap{max-width:1050px;margin:0 auto;padding:48px 20px 64px}
     .topbar{display:flex;justify-content:flex-end;margin-bottom:12px}
     .toggle{border:1px solid var(--line);background:var(--btnbg);color:var(--text);border-radius:999px;padding:9px 14px;font-weight:600;cursor:pointer}
     .hero,.games{border:1px solid var(--line);background:linear-gradient(180deg,color-mix(in oklab,var(--card) 100%, transparent),color-mix(in oklab,var(--card) 92%, transparent));backdrop-filter: blur(10px);border-radius:24px;padding:36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
@@ -23,11 +23,13 @@
     .pill{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:color-mix(in oklab,var(--text) 82%, transparent);font-size:12px}
     h1{font-size:56px;line-height:1.03;margin:14px 0 10px;letter-spacing:-1.6px}
     h2{font-size:32px;margin:0 0 8px}
+    h3{margin:0 0 8px}
     .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{font-size:18px;line-height:1.7;color:var(--muted);max-width:760px}
+    .lead{font-size:18px;line-height:1.7;color:var(--muted);max-width:860px}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;background:var(--btnbg)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;background:var(--btnbg);cursor:pointer}
     .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
     .card{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:16px}
     .card h3{margin:0 0 8px;font-size:16px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
@@ -39,13 +41,23 @@
     .game-wrap{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;margin-top:14px}
     .board{display:grid;grid-template-columns:repeat(3,96px);gap:10px}
     .cell{height:96px;border-radius:14px;border:1px solid var(--line);background:var(--btnbg);font-size:42px;font-weight:800;color:var(--text);cursor:pointer}
-    .cell:hover{transform:translateY(-1px)}
     .panel{min-width:220px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px}
     .status{font-weight:700;margin-bottom:10px}
     .small{font-size:13px;color:var(--muted)}
     .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 
-    @media (max-width:860px){h1{font-size:42px}.grid{grid-template-columns:1fr}.game-wrap{grid-template-columns:1fr}.board{grid-template-columns:repeat(3,minmax(80px,1fr))}.cell{height:82px}}
+    .ludo-wrap{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start;margin-top:14px}
+    .track{display:grid;grid-template-columns:repeat(13,minmax(28px,1fr));gap:6px}
+    .tcell{aspect-ratio:1/1;border:1px solid var(--line);border-radius:10px;background:var(--btnbg);display:flex;align-items:center;justify-content:center;font-size:11px;position:relative}
+    .tcell.safe{outline:2px solid color-mix(in oklab,var(--ok) 55%, transparent)}
+    .dotp{width:11px;height:11px;border-radius:50%;display:inline-block;margin:1px;border:1px solid #0003}
+    .r{background:#ef4444}.g{background:#22c55e}.y{background:#eab308}.b{background:#3b82f6}
+    .legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .legend span{font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:999px}
+    .token-list{display:grid;gap:8px;margin-top:10px}
+    .tok-btn{justify-content:space-between;width:100%}
+
+    @media (max-width:980px){h1{font-size:42px}.grid{grid-template-columns:1fr}.game-wrap,.ludo-wrap{grid-template-columns:1fr}.board{grid-template-columns:repeat(3,minmax(80px,1fr))}.cell{height:82px}}
   </style>
 </head>
 <body>
@@ -74,21 +86,43 @@
       <span class="pill">🎮 Games (Local play)</span>
       <h2>Play <span class="grad">Tic-Tac-Toe</span></h2>
       <p class="lead">Two players on one device. No network. Tap cells alternately and settle it like champions.</p>
-
       <div class="game-wrap">
         <div class="board" id="board"></div>
         <aside class="panel">
           <div class="status" id="status">Turn: X</div>
           <div class="small">Player 1 = X, Player 2 = O</div>
+          <div class="controls"><button class="btn" id="resetBtn">Reset game</button></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="games">
+      <span class="pill">🪙 Ludo (India classic)</span>
+      <h2>Play <span class="grad">Ludo</span> + Undo</h2>
+      <p class="lead">Local 4-player Ludo on one device. Roll dice, move tokens, capture opponents, race all 4 tokens home. Includes <b>Undo</b> for accidental moves.</p>
+
+      <div class="ludo-wrap">
+        <div>
+          <div id="ludoTrack" class="track"></div>
+          <div class="legend"><span><i class="dotp r"></i> Red</span><span><i class="dotp g"></i> Green</span><span><i class="dotp y"></i> Yellow</span><span><i class="dotp b"></i> Blue</span><span>Safe: ⭐</span></div>
+        </div>
+        <aside class="panel">
+          <div class="status" id="ludoStatus">Red's turn</div>
+          <div class="small" id="ludoDice">Roll the dice</div>
           <div class="controls">
-            <button class="btn" id="resetBtn">Reset game</button>
+            <button class="btn primary" id="rollBtn">🎲 Roll</button>
+            <button class="btn" id="undoBtn">↩ Undo</button>
+            <button class="btn" id="newLudoBtn">New game</button>
           </div>
+          <div class="token-list" id="tokenMoves"></div>
+          <div class="small" style="margin-top:10px">Rule note: Real Ludo has detailed board paths. This is a faithful local quick-play variant (4 tokens each, 6 to enter, captures, extra turn on 6/capture, home win).</div>
         </aside>
       </div>
     </section>
   </div>
 
   <script>
+    // Theme toggle
     (function () {
       const root = document.documentElement;
       const btn = document.getElementById('themeToggle');
@@ -104,6 +138,7 @@
       function setTheme(mode){ root.setAttribute('data-theme', mode); btn.textContent = mode === 'dark' ? '🌙 Dark' : '☀️ Light'; }
     })();
 
+    // Tic Tac Toe
     (function(){
       const boardEl = document.getElementById('board');
       const statusEl = document.getElementById('status');
@@ -124,9 +159,7 @@
         });
       }
       function checkWinner(){
-        for(const [a,b,c] of wins){
-          if(board[a] && board[a]===board[b] && board[b]===board[c]) return board[a];
-        }
+        for(const [a,b,c] of wins){ if(board[a] && board[a]===board[b] && board[b]===board[c]) return board[a]; }
         return board.every(Boolean) ? 'draw' : null;
       }
       function move(i){
@@ -139,9 +172,226 @@
         render();
       }
       function reset(){ board = Array(9).fill(''); current='X'; over=false; statusEl.textContent='Turn: X'; render(); }
-
       resetBtn.addEventListener('click', reset);
       reset();
+    })();
+
+    // Ludo Quick-Play with Undo
+    (function(){
+      const colors = ['R','G','Y','B'];
+      const colorName = {R:'Red',G:'Green',Y:'Yellow',B:'Blue'};
+      const colorCls = {R:'r',G:'g',Y:'y',B:'b'};
+      const starts = {R:0,G:13,Y:26,B:39};
+      const safe = new Set([0,8,13,21,26,34,39,47]);
+
+      const ludoTrack = document.getElementById('ludoTrack');
+      const ludoStatus = document.getElementById('ludoStatus');
+      const ludoDice = document.getElementById('ludoDice');
+      const tokenMoves = document.getElementById('tokenMoves');
+      const rollBtn = document.getElementById('rollBtn');
+      const undoBtn = document.getElementById('undoBtn');
+      const newBtn = document.getElementById('newLudoBtn');
+
+      let state, history;
+
+      function init(){
+        state = {
+          turn:0, // index in colors
+          dice:null,
+          rolled:false,
+          mustChoose:false,
+          winner:null,
+          players:{
+            R:[-1,-1,-1,-1],
+            G:[-1,-1,-1,-1],
+            Y:[-1,-1,-1,-1],
+            B:[-1,-1,-1,-1]
+          }
+        };
+        history = [];
+        render();
+      }
+
+      function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+      function pushHistory(){ history.push(clone(state)); if(history.length>200) history.shift(); }
+
+      function currentColor(){ return colors[state.turn]; }
+
+      // pos encoding: -1 = base, 0..51 main track absolute, 52..57 home lane(6 cells), 58 = finished
+      function progressFor(color,pos){
+        if(pos===-1) return -1;
+        if(pos>=52 && pos<=58) return 52 + (pos-52);
+        const start = starts[color];
+        return (pos - start + 52) % 52;
+      }
+
+      function toAbsFromProgress(color,p){
+        return (starts[color] + p) % 52;
+      }
+
+      function canMove(color,ti,dice){
+        const pos = state.players[color][ti];
+        if(pos===58) return false;
+        if(pos===-1) return dice===6;
+
+        if(pos>=52){
+          const next = pos + dice;
+          return next<=58;
+        }
+
+        const p = progressFor(color,pos);
+        const np = p + dice;
+        return np<=57;
+      }
+
+      function moveToken(color,ti,dice){
+        const pos = state.players[color][ti];
+        let newPos;
+        if(pos===-1){
+          newPos = starts[color];
+        } else if(pos>=52){
+          newPos = pos + dice;
+        } else {
+          const p = progressFor(color,pos);
+          const np = p + dice;
+          if(np<=51) newPos = toAbsFromProgress(color,np);
+          else newPos = 52 + (np-52);
+        }
+        state.players[color][ti] = newPos;
+
+        let captured = false;
+        if(newPos>=0 && newPos<=51 && !safe.has(newPos)){
+          for(const oc of colors){
+            if(oc===color) continue;
+            for(let j=0;j<4;j++){
+              if(state.players[oc][j]===newPos){ state.players[oc][j] = -1; captured = true; }
+            }
+          }
+        }
+
+        const allHome = state.players[color].every(p=>p===58);
+        if(allHome) state.winner = color;
+
+        const extra = dice===6 || captured;
+        return {captured,extra};
+      }
+
+      function nextTurn(){ state.turn = (state.turn+1)%4; state.dice=null; state.rolled=false; state.mustChoose=false; }
+
+      function roll(){
+        if(state.winner || state.rolled) return;
+        pushHistory();
+        const c = currentColor();
+        const dice = 1 + Math.floor(Math.random()*6);
+        state.dice = dice;
+        state.rolled = true;
+
+        const possible = [];
+        for(let i=0;i<4;i++) if(canMove(c,i,dice)) possible.push(i);
+
+        if(possible.length===0){
+          ludoDice.textContent = `${colorName[c]} rolled ${dice}. No valid move.`;
+          setTimeout(()=>{ if(!state.winner){ nextTurn(); render(); } }, 700);
+          render();
+          return;
+        }
+        if(possible.length===1){
+          const out = moveToken(c,possible[0],dice);
+          finalizeTurn(c,dice,out);
+          return;
+        }
+        state.mustChoose = true;
+        render();
+      }
+
+      function chooseToken(i){
+        if(!state.mustChoose || state.winner) return;
+        const c = currentColor();
+        if(!canMove(c,i,state.dice)) return;
+        pushHistory();
+        const out = moveToken(c,i,state.dice);
+        finalizeTurn(c,state.dice,out);
+      }
+
+      function finalizeTurn(c,dice,out){
+        state.mustChoose = false;
+        if(state.winner){ render(); return; }
+        if(out.extra){
+          state.rolled = false;
+          state.dice = null;
+          ludoDice.textContent = `${colorName[c]} gets extra turn (${dice===6?'rolled 6': 'capture'}).`;
+        } else {
+          nextTurn();
+        }
+        render();
+      }
+
+      function cellTokens(cell){
+        const arr=[];
+        for(const c of colors){
+          state.players[c].forEach((p)=>{ if(p===cell) arr.push(c); });
+        }
+        return arr;
+      }
+
+      function renderTrack(){
+        ludoTrack.innerHTML='';
+        for(let i=0;i<52;i++){
+          const d=document.createElement('div');
+          d.className='tcell'+(safe.has(i)?' safe':'');
+          const toks=cellTokens(i);
+          d.innerHTML = (safe.has(i)?'⭐':'') + toks.map(c=>`<span class="dotp ${colorCls[c]}"></span>`).join('');
+          ludoTrack.appendChild(d);
+        }
+      }
+
+      function renderMoves(){
+        tokenMoves.innerHTML='';
+        const c = currentColor();
+        const row=document.createElement('div');
+        row.className='small';
+        row.textContent = `${colorName[c]} tokens:`;
+        tokenMoves.appendChild(row);
+
+        state.players[c].forEach((p,i)=>{
+          const b=document.createElement('button');
+          b.className='btn tok-btn';
+          let label='Base';
+          if(p===58) label='Home ✅';
+          else if(p>=52) label=`Home lane ${p-51}/6`;
+          else if(p>=0) label=`Track #${p}`;
+          b.innerHTML = `<span>Token ${i+1}</span><span>${label}</span>`;
+          const valid = state.rolled && canMove(c,i,state.dice);
+          b.disabled = !(state.mustChoose && valid);
+          b.onclick = ()=>chooseToken(i);
+          tokenMoves.appendChild(b);
+        });
+      }
+
+      function render(){
+        renderTrack();
+        renderMoves();
+        undoBtn.disabled = history.length===0;
+        rollBtn.disabled = state.winner || state.rolled;
+
+        if(state.winner){
+          ludoStatus.textContent = `🏆 ${colorName[state.winner]} wins!`;
+          ludoDice.textContent = 'Game over. Start a new game or Undo.';
+          return;
+        }
+
+        const c = currentColor();
+        ludoStatus.textContent = `${colorName[c]}'s turn`;
+        if(!state.rolled) ludoDice.textContent = 'Roll the dice';
+        else if(state.mustChoose) ludoDice.textContent = `${colorName[c]} rolled ${state.dice}. Choose a token.`;
+        else ludoDice.textContent = `${colorName[c]} rolled ${state.dice}.`;
+      }
+
+      rollBtn.addEventListener('click', roll);
+      undoBtn.addEventListener('click', ()=>{ if(history.length){ state = history.pop(); render(); } });
+      newBtn.addEventListener('click', init);
+
+      init();
     })();
   </script>
 </body>
