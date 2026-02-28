@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,6 +18,20 @@
       --accent:#7dd3fc;
       --accent2:#a78bfa;
       --ok:#34d399;
+      --btnbg:#111b2b;
+      --shadow:0 20px 80px rgba(0,0,0,.45);
+    }
+    html[data-theme="light"]{
+      --bg:#eef4ff;
+      --card:#ffffffd6;
+      --line:#c8d6ef;
+      --text:#0f172a;
+      --muted:#334155;
+      --accent:#0369a1;
+      --accent2:#6d28d9;
+      --ok:#059669;
+      --btnbg:#ffffff;
+      --shadow:0 20px 50px rgba(15,23,42,.12);
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
@@ -25,55 +39,65 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 15% -20%, #1d4ed8 0%, transparent 60%),
-        radial-gradient(900px 500px at 90% -10%, #7c3aed 0%, transparent 55%),
-        radial-gradient(1200px 800px at 50% 120%, #065f46 0%, transparent 55%),
+        radial-gradient(1200px 600px at 15% -20%, color-mix(in oklab, var(--accent) 45%, transparent) 0%, transparent 60%),
+        radial-gradient(900px 500px at 90% -10%, color-mix(in oklab, var(--accent2) 45%, transparent) 0%, transparent 55%),
+        radial-gradient(1200px 800px at 50% 120%, color-mix(in oklab, var(--ok) 30%, transparent) 0%, transparent 55%),
         var(--bg);
       overflow-x:hidden;
+      transition: background .35s ease, color .25s ease;
     }
     .noise::before{
-      content:""; position:fixed; inset:0; pointer-events:none; opacity:.08;
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.06;
       background-image: radial-gradient(#fff 0.45px, transparent 0.45px);
       background-size: 3px 3px;
       mix-blend-mode:soft-light;
     }
     .wrap{max-width:1000px;margin:0 auto;padding:48px 20px 64px}
+    .topbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+    .toggle{
+      border:1px solid var(--line);background:var(--btnbg);color:var(--text);
+      border-radius:999px;padding:9px 14px;font-weight:600;cursor:pointer
+    }
     .hero{
       border:1px solid var(--line);
-      background:linear-gradient(180deg,#10192ad9,#0d1421cc);
+      background:linear-gradient(180deg,color-mix(in oklab,var(--card) 100%, transparent),color-mix(in oklab,var(--card) 92%, transparent));
       backdrop-filter: blur(10px);
       border-radius:24px;
       padding:36px;
-      box-shadow:0 20px 80px rgba(0,0,0,.45);
+      box-shadow:var(--shadow);
       position:relative;
       overflow:hidden;
     }
     .hero:after{
       content:"";position:absolute;inset:auto -120px -120px auto;width:340px;height:340px;border-radius:50%;
-      background:radial-gradient(circle,#7dd3fc55 0, #7dd3fc00 70%);
+      background:radial-gradient(circle,color-mix(in oklab,var(--accent) 35%, transparent) 0, transparent 70%);
       filter:blur(8px);
     }
-    .pill{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid #334155;border-radius:999px;color:#c7d2fe;font-size:12px}
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:color-mix(in oklab,var(--text) 82%, transparent);font-size:12px}
     h1{font-size:56px;line-height:1.03;margin:14px 0 10px;letter-spacing:-1.6px}
     .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
     .lead{font-size:18px;line-height:1.7;color:var(--muted);max-width:760px}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid #3a4b66;color:#dbeafe;text-decoration:none;font-weight:600}
-    .btn.primary{background:linear-gradient(90deg,#0284c7,#7c3aed);border:none}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;background:var(--btnbg)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none}
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
     .card{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:16px}
     .card h3{margin:0 0 8px;font-size:16px}
     .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
     .tagrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    .tag{padding:7px 10px;border-radius:999px;border:1px solid #324257;color:#bfdbfe;font-size:12px}
-    .footer{margin-top:22px;color:#88a0bf;font-size:13px}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 6px #34d39922;display:inline-block;margin-right:6px;vertical-align:middle}
+    .tag{padding:7px 10px;border-radius:999px;border:1px solid var(--line);color:color-mix(in oklab,var(--text) 82%, transparent);font-size:12px}
+    .footer{margin-top:22px;color:var(--muted);font-size:13px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 6px color-mix(in oklab,var(--ok) 22%, transparent);display:inline-block;margin-right:6px;vertical-align:middle}
     @media (max-width:860px){h1{font-size:42px}.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="noise"></div>
   <div class="wrap">
+    <div class="topbar">
+      <button id="themeToggle" class="toggle" aria-label="Toggle theme">🌙 Dark</button>
+    </div>
+
     <section class="hero">
       <span class="pill">❤️ John • Ghost in machine • Sharp</span>
       <h1>Build. Automate. <span class="grad">Ship.</span></h1>
@@ -112,5 +136,27 @@
       <p class="footer"><span class="dot"></span>Live on GitHub Pages</p>
     </section>
   </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const stored = localStorage.getItem('theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      const start = stored || (prefersLight ? 'light' : 'dark');
+      setTheme(start);
+
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        localStorage.setItem('theme', next);
+      });
+
+      function setTheme(mode){
+        root.setAttribute('data-theme', mode);
+        btn.textContent = mode === 'dark' ? '🌙 Dark' : '☀️ Light';
+      }
+    })();
+  </script>
 </body>
 </html>
